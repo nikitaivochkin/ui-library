@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/nikitaivochkin"
   },
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "cusotom ui lib",
   "scripts": {
     "rollup": "rollup -c",
