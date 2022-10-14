@@ -1,0 +1,67 @@
+@import '../../styles/index.scss';
+
+$base: 'button-common';
+
+.#{$base} {
+  position: relative;
+  font-size: 14px;
+  border-radius: $btnRadius;
+  @include btnText;
+  cursor: pointer;
+  transition: color 150ms linear, background-color 150ms linear, box-shadow 150ms linear;
+
+  &_disabled {
+    cursor: not-allowed;
+  }
+
+  &_primary {
+    background-color: $red200;
+    color: $white;
+    border: unset;
+    box-shadow: 0px 4px 10px rgba(231, 19, 19, 0.1), 0px 10px 20px rgba(231, 19, 19, 0.16), 0px 10px 24px rgba(231, 19, 19, 0.2);
+
+    &:hover {
+      background-color: $red300;
+      box-shadow: 0px 4px 16px rgba(231, 19, 19, 0.1), 0px 10px 24px rgba(231, 19, 19, 0.2);
+    }
+
+    &:active {
+      background-color: $red400;
+    }
+  }
+
+  &_primary.#{$base}_disabled {
+    background-color: $btn_disabled;
+    box-shadow: unset;
+  }
+
+  &_secondary {
+    background-color: $white;
+    border: 2px solid $gray300;
+
+    &:hover {
+      border: 2px solid $gray400;
+    }
+
+    &:active {
+      border: 2px solid $gray500;
+    }
+  }
+
+  &_secondary.#{$base}_disabled {
+    color: $gray500;
+    border: 2px solid $gray500;
+  }
+
+  &_l {
+    padding: 17px 28px;
+  }
+
+  &_m {
+    padding: 14px 20px;
+  }
+
+  &_s {
+    padding: 10px 20px;
+  }
+}
