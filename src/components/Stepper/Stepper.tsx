@@ -26,11 +26,11 @@ const Stepper: FC<StepperProps> = ({
     const isFirstElement = !index;
 
     const stepClassNames = cx({
-      'step': true,
+      step: true,
       [`step-${orientation}`]: true,
-      'step_done': isDone,
-      'step_active': isActive,
-      'step_disabled': isDisabled,
+      step_done: isDone,
+      step_active: isActive,
+      step_disabled: isDisabled,
     });
 
     return (
@@ -38,27 +38,27 @@ const Stepper: FC<StepperProps> = ({
         key={title}
         className={stepClassNames}
       >
-        <div className='step__icon-container'>
+        <div className="step__icon-container">
           <div
-            className='step__icon'
+            className="step__icon"
           >
             <span>{ index + 1 }</span>
           </div>
           <div
-            className='step__title'
+            className="step__title"
           >
             { title }
           </div>
           {
             !isFirstElement && isHorisontal && (
               <div
-                className='step__line'
+                className="step__line"
               />
             )
           }
         </div>
       </div>
-    )
+    );
   });
 
   const stepperClassNames = cx({
@@ -69,7 +69,7 @@ const Stepper: FC<StepperProps> = ({
   return (
     <div
       className={stepperClassNames}
-      data-testid='stepper'
+      data-testid="stepper"
     >
       {
         renderSteps

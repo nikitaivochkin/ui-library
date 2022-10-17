@@ -10,9 +10,9 @@ describe('stepper', () => {
       <Stepper
         steps={['One', 'Two', 'Three']}
         activeStep={2}
-      />
+      />,
     );
-    
+
     const stepper = screen.getByTestId('stepper');
     const stepsElements = stepper.getElementsByClassName('step');
 

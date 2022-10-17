@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Button from './Button';
 
 export default {
-  title: "ReactComponentLibrary/Button",
+  title: 'ReactComponentLibrary/Button',
   component: Button,
 } as ComponentMeta<typeof Button>;
 
@@ -18,5 +18,5 @@ SizeMBnt.args = {
 export const TypeSecondaryBtn = Template.bind({});
 
 TypeSecondaryBtn.args = {
-  type: "secondary",
+  type: 'secondary',
 };
