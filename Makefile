@@ -6,3 +6,6 @@ test:
 
 storybook:
 	npm run storybook
+
+lint:
+	npx eslint . --ext js,jsx,ts,tsx
