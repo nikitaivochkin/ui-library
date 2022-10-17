@@ -1,0 +1,177 @@
+@import '../../styles/index.scss';
+
+$base: 'stepper';
+$stepBase: 'step';
+$iconSize: 30px;
+
+.#{$base} {
+  position: relative;
+  display: flex;
+
+  width: 100%;
+
+  font-family: $default-font;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+
+  &-horisontal {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &-vertical {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: fit-content;
+
+    & > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .step {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 1;
+
+    &-vertical {
+      margin-bottom: 20px;
+    }
+
+    &__icon-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+    }
+
+    &__icon {
+      position: relative;
+      width: $iconSize;
+      height: $iconSize;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      margin-bottom: 12px;
+
+      border-radius: 9999px;
+      border-width: 2px;
+      border-style: solid;
+
+      transition:
+        border-color 150ms linear,
+        background-color 150ms linear,
+        background-image 150ms linear,
+        color 150ms linear;
+      transition-delay: 300ms;
+    }
+
+    &__title {
+      position: relative;
+
+      text-align: center;
+      word-break: break-all;
+      white-space: pre-wrap;
+
+      transition: color 150ms linear;
+      transition-delay: 300ms;
+    }
+
+    &__line {
+      position: absolute;
+      top: calc(#{$iconSize + 2} / 2);
+      left: calc(-50% + (#{$iconSize} / 2) + 8px);
+      right: calc(50% + (#{$iconSize} / 2) + 8px);
+
+      height: 2px;
+      flex: 1 1 auto;
+
+      background-color: $gray400;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background-color: $red200;
+
+        transition: width 300ms linear;
+      }
+    }
+
+    &_done {
+      .#{$stepBase}__icon {
+        background-color: $red200;
+        border-color: $red200;
+        color: $white;
+
+        background-image: url(/src/assets/images/Stepper/check.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 50% 50%;
+
+        span {
+          display: none;
+        }
+      }
+
+      .#{$stepBase}__title {
+        color: $black;
+      }
+
+      .#{$stepBase}__line {
+        &::before {
+          width: 100%;
+        }
+      }
+    }
+
+    &_active {
+      .#{$stepBase}__icon {
+        background-color: $white;
+        border-color: $red200;
+        color: $red200;
+      }
+
+      .#{$stepBase}__title {
+        color: $red200;
+      }
+
+      .#{$stepBase}__line {
+        &::before {
+          width: 100%;
+        }
+      }
+    }
+
+    &_disabled {
+      .#{$stepBase}__icon {
+        background-color: $gray200;
+        border-color: $gray400;
+        color: $gray400;
+      }
+
+      .#{$stepBase}__title {
+        color: $gray500;
+      }
+
+      .#{$stepBase}__line {
+        background-color: $gray400;
+      }
+    }
+  }
+}
