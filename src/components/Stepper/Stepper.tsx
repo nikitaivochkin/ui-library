@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import cx from 'classnames';
+import SVG from 'react-inlinesvg';
+import checkIcon from '@/assets/images/Stepper/check.svg';
 
 import './styles.scss';
 
@@ -43,6 +45,9 @@ const Stepper: FC<StepperProps> = ({
             className="step__icon"
           >
             <span>{ index + 1 }</span>
+            {
+              isDone && (<SVG src={checkIcon} />)
+            }
           </div>
           <div
             className="step__title"

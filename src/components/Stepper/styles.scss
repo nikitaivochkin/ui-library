@@ -73,7 +73,6 @@ $iconSize: 30px;
       transition:
         border-color 150ms linear,
         background-color 150ms linear,
-        background-image 150ms linear,
         color 150ms linear;
       transition-delay: 300ms;
     }
@@ -118,11 +117,6 @@ $iconSize: 30px;
         background-color: $red200;
         border-color: $red200;
         color: $white;
-
-        background-image: url(/src/assets/images/Stepper/check.svg);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 50% 50%;
 
         span {
           display: none;

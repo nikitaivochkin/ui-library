@@ -9,3 +9,6 @@ storybook:
 
 lint:
 	npx eslint . --ext js,jsx,ts,tsx
+
+publish:
+	npm publish

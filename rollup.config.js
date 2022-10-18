@@ -5,6 +5,9 @@ import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
 import dts from 'rollup-plugin-dts';
 import clear from 'rollup-plugin-clear';
+import alias from '@rollup/plugin-alias';
+import copy from 'rollup-plugin-copy';
+import svg from 'rollup-plugin-svg';
 
 import { terser } from 'rollup-plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
@@ -38,6 +41,21 @@ export default [
       clear({
         targets: ['dist'],
       }),
+      copy({
+        targets: [
+          {
+            src: 'src/assets',
+            dest: 'dist',
+          },
+        ],
+      }),
+      alias({
+        resolve: ['.js', '.jsx', '.ts', '.tsx', '.css', '.scss', '.sass'],
+        entries: [
+          { find: '@', replacement: path.resolve(__dirname, 'src') },
+        ],
+      }),
+      svg(),
     ],
   },
   {

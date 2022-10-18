@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Stepper from './Stepper';
+import Stepper from '.';
 
 export default {
   title: 'ReactComponentLibrary/Stepper',
