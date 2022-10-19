@@ -42,12 +42,13 @@ input[type="range"] {
   width: 100%;
   height: auto;
 
-  font-family: RobotoR;
+  font-family: $default-font;
 
   input {
     position: absolute;
     width: 100%;
     z-index: 2;
+    cursor: pointer;
 
     &::before {
       content: '';

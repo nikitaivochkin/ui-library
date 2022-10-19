@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+// import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/dom'
 import '@testing-library/jest-dom';
 
@@ -81,25 +82,27 @@ describe('button', () => {
     expect(slider.getElementsByClassName('slider__current-value')[0].textContent).toBe('1 000 000 ₽');
   });
 
-  test('drag thumb', () => {
+  test('call cb', () => {
     const cb = jest.fn();
+    window = Object.assign(window, { innerWidth: 500 });
 
     render(
-      <Slider
-        title='Title'
-        costRange={[500, 1000]}
-        defaultCost={500}
-        cb={cb}
-      />
+      <div style={{ width: '500px' }}>
+        <Slider
+          title='Title'
+          costRange={[500, 1000]}
+          defaultCost={500}
+          cb={cb}
+        />
+      </div>
     );
 
     const slider = screen.getByTestId('slider');
     const sliderInput = slider.getElementsByTagName('input')[0];
 
-    fireEvent.change(sliderInput, { target: { value: 500 } });
+    fireEvent.mouseDown(sliderInput);
+    fireEvent.mouseUp(sliderInput);
 
-    expect(slider.getElementsByClassName('slider__current-value')[0].textContent).toBe('750 000 ₽');
-    expect(slider.getElementsByClassName('slider__track')[0]).toHaveStyle('width: 50%');
     expect(cb).toHaveBeenCalled();
     expect(cb).toHaveBeenCalledTimes(1);
   });

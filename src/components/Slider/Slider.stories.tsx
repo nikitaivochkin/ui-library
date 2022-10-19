@@ -19,6 +19,8 @@ SliderDefault.args = {
   range: [0, 1000],
   costRange: [450, 1000],
   defaultCost: 603,
+  // eslint-disable-next-line no-console
+  onChange: console.log,
 };
 
 export const SliderWithArgs = Template.bind({});

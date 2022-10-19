@@ -1,5 +1,10 @@
 import React, {
-  ChangeEvent, FC, useState, useCallback,
+  useState,
+  useCallback,
+  FC,
+  ChangeEvent,
+  TouchEvent,
+  MouseEvent,
 } from 'react';
 import cx from 'classnames';
 import clamp from 'lodash.clamp';
@@ -17,7 +22,7 @@ type SliderProps = {
   color?: 'red100' | 'red200' | 'red300',
   currensy?: '₽' | '$' | '€' | '£',
   // eslint-disable-next-line no-unused-vars
-  cb?: (n?: number) => void,
+  onChange?: (n: number) => void | typeof noop,
 }
 
 const Slider: FC<SliderProps> = ({
@@ -29,15 +34,9 @@ const Slider: FC<SliderProps> = ({
   step = 1,
   color = 'red100',
   currensy = '₽',
-  cb = noop,
+  onChange = noop,
 }: SliderProps) => {
-  // eslint-disable-next-line no-unused-vars
-  const memoisedCallBack: (n?: number) => void = useCallback(
-    () => {
-      cb();
-    },
-    [],
-  );
+  const memousedOnChange = useCallback((n: number) => onChange(n), []);
 
   const [min, max] = range;
   const [minValue, maxValue] = costRange.map((n) => (n <= 0 ? 1 : n));
@@ -45,7 +44,7 @@ const Slider: FC<SliderProps> = ({
 
   const defaultValue = ((clamp(defaultCost, ...costRange) - minValue) / diffFactor) * 10;
 
-  const [value, setValue] = useState(defaultValue);
+  const [value, setValue] = useState<number>(defaultValue);
 
   const getCurrentCost = (v: number): number => {
     const rangeFactor = (100 / max) * v;
@@ -57,9 +56,16 @@ const Slider: FC<SliderProps> = ({
   const handleChangeRange = (e: ChangeEvent<HTMLInputElement>) => {
     const currentInputValue = Number(e.target.value);
     setValue(currentInputValue);
+  };
 
-    const currentCostValue: number = getCurrentCost(currentInputValue);
-    memoisedCallBack(currentCostValue);
+  const handleMouseUp = (e: MouseEvent<HTMLInputElement>) => {
+    const currentInputValue = Number((e.target as HTMLInputElement).value);
+    memousedOnChange(getCurrentCost(currentInputValue));
+  };
+
+  const handleTouchEnd = (e: TouchEvent<HTMLInputElement>) => {
+    const currentInputValue = Number((e.target as HTMLInputElement).value);
+    memousedOnChange(getCurrentCost(currentInputValue));
   };
 
   const costRates = [
@@ -125,6 +131,8 @@ const Slider: FC<SliderProps> = ({
           step={step}
           value={value}
           onChange={handleChangeRange}
+          onMouseUp={handleMouseUp}
+          onTouchEnd={handleTouchEnd}
         />
       </div>
 
