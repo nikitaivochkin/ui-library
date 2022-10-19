@@ -92,7 +92,7 @@ describe('button', () => {
           title='Title'
           costRange={[500, 1000]}
           defaultCost={500}
-          cb={cb}
+          onChange={cb}
         />
       </div>
     );
