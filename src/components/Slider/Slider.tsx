@@ -17,7 +17,7 @@ type SliderProps = {
   color?: 'red100' | 'red200' | 'red300',
   currensy?: '₽' | '$' | '€' | '£',
   // eslint-disable-next-line no-unused-vars
-  cb?: (n: number) => void,
+  cb?: (n?: number) => void,
 }
 
 const Slider: FC<SliderProps> = ({
@@ -31,7 +31,13 @@ const Slider: FC<SliderProps> = ({
   currensy = '₽',
   cb = noop,
 }: SliderProps) => {
-  const memoisedCallBack = useCallback(cb, []);
+  // eslint-disable-next-line no-unused-vars
+  const memoisedCallBack: (n?: number) => void = useCallback(
+    () => {
+      cb();
+    },
+    [],
+  );
 
   const [min, max] = range;
   const [minValue, maxValue] = costRange.map((n) => (n <= 0 ? 1 : n));
@@ -52,7 +58,7 @@ const Slider: FC<SliderProps> = ({
     const currentInputValue = Number(e.target.value);
     setValue(currentInputValue);
 
-    const currentCostValue = getCurrentCost(currentInputValue);
+    const currentCostValue: number = getCurrentCost(currentInputValue);
     memoisedCallBack(currentCostValue);
   };
 
