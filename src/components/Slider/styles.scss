@@ -1,0 +1,156 @@
+@import '../../styles/index.scss';
+
+$base: 'slider';
+$colors: (
+  'red100': $red100,
+  'red200': $red200,
+  'red300': $red300,
+  'disabled': $gray500,
+);
+
+@mixin thumb {
+  width: 24px;
+  height: 24px;
+  background-color: $white;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 16px -4px rgba(203, 47, 49, 0.5);
+  cursor: pointer;
+}
+
+input[type="range"] {
+  color: unset;
+  margin: 0;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  appearance: none;
+  height: 4px;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    @include thumb;
+  }
+
+  &::-moz-range-thumb {
+    @include thumb;
+  }
+}
+
+.#{$base} {
+  position: relative;
+  width: 100%;
+  height: auto;
+
+  font-family: RobotoR;
+
+  input {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+
+    &::before {
+      content: '';
+    }
+  }
+
+  &__title {
+    margin-bottom: 10px;
+
+    color: $neutral-black;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &__current-value {
+    margin-bottom: 10px;
+
+    color: $neutral-black;
+
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 42px;
+  }
+
+  &__input {
+    position: relative;
+    margin-bottom: 30px;
+  }
+
+  &__root {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 4px;
+  }
+
+  &__thumb {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    left: 0;
+    width: 24px;
+    height: 24px;
+
+    border-radius: 9999px;
+    box-sizing: border-box;
+  }
+
+  &__rail {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    background-color: $gray300;
+    border-radius: 10px;
+  }
+
+  &__track {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+
+    border-radius: 10px;
+  }
+
+  .slider-cost-range {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: $gray500;
+  }
+
+  @mixin colorStyle ($color) {
+    .#{$base}__thumb {
+      border: 3px solid #{$color};
+    }
+  
+    .#{$base}__track {
+      background-color: #{$color};
+    }
+  
+    input[type="range"] {
+      &::-webkit-slider-thumb {
+        border: 3px solid #{$color};
+      }
+    
+      &::-moz-range-thumb {
+        border: 3px solid #{$color};
+      }
+    }
+  }
+
+  @each $name, $color in $colors {
+    &_#{$name} {
+      @include colorStyle($color);
+    }
+  }
+}
